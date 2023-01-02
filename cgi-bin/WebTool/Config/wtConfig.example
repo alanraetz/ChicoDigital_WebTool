@@ -1,0 +1,38 @@
+
+
+package Config::wtConfig;
+
+%var = (
+
+CGI_PATH => '/big/dom/xyourSite/cgi-bin/WebTool/',
+
+WEB_ROOT => 'http://yourSite.com/WebTool/',
+
+HOME => '/big/dom/xyourSite/www/WebTool/',
+
+CONTENT_URL => 'http://yourSite.com/wtPages/',
+
+CONTENT_DIR => '/big/dom/xyourSite/www/wtPages/',
+
+BASE_TITLE => 'Web Tool 100',
+
+TEXTBOX_LINKS => 'yes',
+
+PLATFORM => 'Unix',
+
+REMOVE_SSI => 'yes',
+
+ARCHIVE_DEPTH => '',
+
+MAIL_PATH => '',
+
+MAIL_ERRORS_TO => '',
+
+SCRIPT_URL => 'http://yourSite.com/cgi-bin/WebTool/webtool.cgi',
+
+MAIL_ERROR_ENABLE => 'no',
+
+);
+
+1;
+

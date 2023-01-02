@@ -1,0 +1,199 @@
+<HTML>
+<HEAD>
+<TITLE>Chico Digital Web Tool : User's Guide</TITLE>
+</HEAD>
+<BODY>
+<TABLE width=100%><TR><TD width=15%></TD><TD width="70%">
+
+<table border=0 width="100%">
+<tr>
+<td ALIGN=CENTER VALIGN=TOP>
+<img SRC="graphics/ColorLogo3.gif" ALT="Chico Digital Engineering" height=130 width=530>
+</td>
+</tr>
+</table>
+
+<h1>Web Tool User's Guide</h1>
+
+<font>
+<ul><b>
+
+<a href="#template"><li>Selecting a Template</li></a>
+<a href="#addText"><li>Adding Text To A Page</li></a>
+<a href="#addLink"><li>Adding Links and New Pages</li></a>
+<a href="#delete"><li>Deleting a Page</li></a>
+<a href="#ending"><li>Ending Your Edit Session / Creating Static Web Pages</li></a>
+<a href="#static"><li>Web Tool creates Static Web Pages, But...</li></a>
+<a href="#moving"><li>Moving Existing Web Page Content Into Web Tool</li></a>
+<a href="#example"><li>A Web Site Example</li></a>
+
+</b></ul>
+
+<a name="#template">
+<h2>Selecting a Template</h2>
+</a>
+
+<p>The banner above the text area has a pull-down menu on the right side that
+selects the template that will be used for that page. Different pages can use
+different templates. Select the template and click 'Save and Preview Page' to
+view the appearance of each template.
+
+<br>
+<a name="#addText">
+<h2>Adding Text To A Page</h2>
+</a>
+
+<p>The text box preserves link breaks. It disables any scripting tags by default, such as javascript or PHP.
+
+<p>Never add HTML, HEAD, or BODY tags, since the text you type in is already part of a HTML page (that comes from a separate template file).
+
+<p>When you hit 'Save and Preview Page', this saves the page content to the database and displays the HTML output of that page, with the editor screen on the bottom (use the browser scroll bar to see the editor fields). The links on the previewed page will NOT be correctly functional. They may link to pages that have not been created. The preview is for visual purposes only.
+
+<p>Any links that begin 'http://' will automatically be converted into a clickable link.
+
+<p>Any text that matches a link name on that page will be converted into a clickable link. So if you have a link 'more about me' and in the text you write 'more about me', that text will be converted into a link to the corresponding page. This feature is case-sensitive, 'More About Me' will not be converted.
+
+<p>The text box accepts any valid HTML, including URLs to gifs or photos. Use the full path to any URL address, because the preview page and hard HTML page are in different directories; relative URL addressing will not work.
+
+<p>Because the text box recognizes both HTML and plain text, there is a compromise between these two formats. HTML code is not line-independent; newlines are recognized (and turned into &lt BR &gt tags, if that means anything to you).
+
+<a name="#addLink">
+<h2>Adding Links and New Pages</h2>
+</a>
+
+<p>When you type a name into the 'Create A New Page' field and submit it, that
+name will be the title of a new web page. The new title will appear in the left
+column. Click on the link to go to that page. Add text to that page by typing
+in the text box. Add links to that sub-page by repeating this process.
+
+<p>Note that the order of the links is the order they are entered, and this
+can not be changed.
+
+<a name="#delete">
+<h2>Deleting a Page</h2>
+</a>
+
+<p>If you want to delete a page, just go to that page and click on 'Delete
+Page' at the bottom. Confirm the operation, and this will delete:<br><br>
+&nbsp&nbsp&nbsp&nbsp     1) The text on that page<br>
+&nbsp&nbsp&nbsp&nbsp     2) Any links on that page, and the text on those sub-pages.<br>
+&nbsp&nbsp&nbsp&nbsp     3) Any reference to that page on other pages.<br>
+
+<a name="#ending">
+<h2>Ending Your Edit Session / Creating Static Web Pages</h2>
+</a>
+
+<p>This creates hard HTML files from your edit session in a specific directory
+on the web server. The confirmation message will have a link that will lead you to the base page. Any changes you made in the session should be reflected in the new pages; remember to hit 'reload' on your browser to update your local copy.
+
+<br><br><hr><br><br>
+
+<a name="#static">
+<h2>Web Tool creates static HTML Web Pages, but...</h2>
+</a>
+
+<p>Web Tool creates static web pages that should never be directly edited.
+Any changes directly made to the HTML file will be lost the next time that
+file is changed using the Web Tool application.
+
+<p>You can only edit a web page in the Web Tool editor, or by altering the
+template (or creating a new template for that page); you can't directly edit
+the static file. WebTool doesn't get it's data to create new pages from the
+old pages. It has it's own internal database, and so:
+
+<p><b>Web Tool database + template file => web page.</b>
+
+<p>The old page is out of the loop. It can be deleted at any time and Web
+Tool will gladly regenerate it. Think of the static web pages as a snapshot
+of the database. All the web pages within the Web Tool content subdirectory
+can be manually deleted and they'll be (quickly!) regenerated when you hit
+'End Session' => 'regenerate all pages'. Web Tool can regenerate even large
+web sites in just a few seconds.
+
+<p>There are many advantages to this system; if you're site only uses one
+template, and has 50 separate pages, you can completely change the look
+of the entire site by making changes to the template file and regenerating
+all pages.
+
+<p>Web Tool isn't going to manage web pages that have been previously
+created. It's pages only auto-link into pages it has created (you can't make
+a page that already exist appear in the left column of the editor screen);
+you can add links to other pages within the main text area, though (be sure you
+use the full URL path). Your administrator can also create templates with static
+links that point back to other pages on your web site.<br>
+
+<a name="#moving">
+<h2>Moving Existing Web Page Content Into Web Tool</h2>
+</a>
+
+<p>So how do you add your current web pages into Web Tool? You just have to
+open the HTML file with an editor and copy and paste the main body into the
+WebTool textbox window. The line spacing usually has to be adjusted when you
+do this, because the edit box preserves line breaks and HTML files don't. If
+you have more than a couple pages to add to Web Tool this way, your
+administrator can configure Web Tool's Customize.pm file to accept HTML
+without adding line breaks.
+
+<p>Note you wouldn't copy the entire HTML file, just the content within the
+main body, since the template supplies the header, title and &lt BODY &gt tags.
+You never add &lt HTML &gt, &lt HEAD &gt, &lt BODY &gt tags. The textbox area
+in the editor represents the main body area within the finished web page. The
+template file controls the formatting.
+
+<a name="#example">
+<h2>A Web Site Example</h2>
+</a>
+<p>Web Tool allows you to organize information into a tree structure
+of web pages.
+
+<p>Each page you create will have a series of links down the left
+column which will help guide the web site visitors to what they're
+looking for.
+
+<p>A typical informational web area might have these sub-pages:<br><br>
+
+<li>'Current Issues' </li><br>
+<li>'About Us' </li><br>
+<li>'Weekly Updates'</li><br>
+
+<p>The link structure can be as 'deep' as required. The 'Current Issues'
+page could link to a page 'World Hunger', which could link to a page 'Iraq'
+which could link to a group of pages 'News' 'Links' and 'How to Help'.
+Each one of these pages will have both text and links on it. So you can
+give a summary, and then provide page links to more detailed information.
+
+<p>Here's a tree structure diagram of how these pages would be accessed:
+
+<pre>
+                       Home Page
+                           |
+             'Current Issues'   'About Us'  'Weekly Updates'
+                   |
+       'World Hunger'  'The Environment' 'Local Issues'
+         |
+     'Iraq'
+       |
+'News' 'Links' 'How to Help'
+</pre>
+
+<p>By dividing up your site into logical pages, visitors can easily find and
+access information that is of interest to them, using the links in the left
+column to guide them.
+
+
+
+</font>
+</TD>
+<TD width=15%></TD></TR>
+</TABLE>
+<br><br>
+<hr>
+<small>Copyright 2002<br>
+Chico Digital Engineering<br>
+contact:
+ <i><a href="mailto:info@chicodigital.com">info@chicodigital.com</a></i></small>
+<br>
+<br>
+
+</BODY>
+</HTML>

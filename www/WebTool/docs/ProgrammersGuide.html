@@ -1,0 +1,306 @@
+<HTML>
+<HEAD>
+<TITLE>Chico Digital Web Tool : Programmer's Guide</TITLE>
+</HEAD>
+<BODY>
+<TABLE width=100%><TR><TD width=15%></TD>
+
+<TD width="70%">
+<font>
+<table border=0 width="100%">
+<tr>
+<td ALIGN=CENTER VALIGN=TOP>
+<img SRC="graphics/ColorLogo3.gif" ALT="Chico Digital Engineering" height=130 width=530>
+</td>
+</tr>
+</table>
+<CODE>
+
+<h3>Web Tool Programmer's Guide</h3>
+
+<h3>
+I.   The Perl Database<br>
+II.  The CGI Interface<br>
+III. Web Tool Editor Execution Loop<br>
+IV. Perl References<br>
+</h3>
+
+<p>This is a basic overview of some of the internal functionality. In addition, the AdminGuide.html file describes how to create template files.
+
+<h3>I. The Perl Database</h3>
+<ul>
+<p>Web Tool uses a Perl hash-of-hashes structure to store the data during the
+editor session. The quickest way to understand how Web Tool works is to look
+at the perl database file: it's a text file that represents all the data in
+a Perl hash-of-hashes structure. It's in the cgi-bin/WebTool/Data directory,
+and is named after your BASE_TITLE. So if you're BASE_TITLE is 'Test Name' then
+the Perl database file would be cgi-bin/WebTool/Data/TestName.pm.
+
+<p><b>A Perl Hash Overview</b>
+
+<p>A hash is a collection of keys/value pairs:
+
+<ul>
+     <p>my %myHash;
+     <p>$myHash{'a string for a key'} = 'a string value';
+     <p>$myHash{thisisatest} = 10;
+     <p>$myHash{5555} = $any_variable;
+
+     <p>etc.
+</ul>
+
+<p>The key is within the brackets, the value is what the variable gets assigned
+to. Every key has a value, and vis-versa. Values and keys can be strings or
+numbers (only strings with whitespace need quotes). Hashes are also called
+associative arrays, and aren't specific to Perl, but Perl implements them in a
+way that maximizes their utility:
+
+<ul>
+     <p><b>1) A hash has a key and a value, but that value can be a reference to
+     another hash, which can have keys that reference yet another hash and so
+     on.</b> This is written in Perl as:
+
+     <p>$myHash{vehicles}{pickups}{chevy}{S10}{1991}{comments} = 'a test of perl
+     hashes';
+
+     <p>So this one line of Perl creates a structure where each name in the
+     curly braces corresponds to a hash key, and the value of that key is a       reference to another Perl hash key. This also demonstrates
+
+     <p><b>2) Perl hashes can create deep structures out of thin air.</b> By
+     this I mean that each level of the structure above did NOT need to be
+     initialized beforehand. The non-Perl way of doing the above example might
+     be:
+
+     <p>$myReference = $myHash{vehicles};
+
+     <p>$myNextRef1 = $myReference{pickups};
+
+     <p>$myNextRef2 = $myNextRef1{chevy};
+
+     <p>So Perl always you to create an instance of a variable anywhere in the
+     data structure, even if any or all of the sub-hashes do not exist.
+
+     <p>$myHash{vehicles}{pickups}{chevy}{S10}{1991}{comments} = 'a test of perl
+     hashes';
+
+     <p>The hash keys of 'vehicles' (or any of the other sub-hashes) may or may
+     not have already existed; it doesn't matter; Perl will either create it or
+     use what is already there.
+
+     <p>I should mention that there are a number of different ways to reference a Perl hash, many of them are different ways of doing the same thing. As a single example (there are many more variants):
+
+<pre>
+This:
+
+my $ref = \%myHash;
+$comment = $ref->vehicles->pickups->chevy->S10->1991->comments;
+
+Is the same as this:
+
+$comment = $myHash{vehicles}{pickups}{chevy}{S10}{1991}{comments};
+</pre>
+
+     <p><b>3) Perl does not have any size limits.</b> Each level of the
+     hash-of-hashes
+     structure can have an infinite number of entries, and can be infinitely
+     deep... limited by the memory of your system, of course, but no other
+     internal limitations. Strings (including the key values) can also be
+     infinitely large.
+
+     <p>So this hash entry is completely valid:
+
+<ul>
+          <p>$myHash{'Perl does not have any size limits. Each level of the
+          hash-of-hashes structure can have an infinite number of entries, and
+          can be infinitely deep'} = '... limited by the memory of your system,
+          of course, but no other internal limitations. Strings (including the
+          key values) can also be infinitely large.';
+</ul>
+</ul>
+     <p>This would work even if the string was 10 megabytes long, and the system had over 10 megabytes of memory available for the Perl process. This type of functionality isn't theoretical, it's been tested, and it works. An entire web page can be put in a single string and be pointed to by a deep structure of perl hash keys where each key represents where that page exists on the web site. This is exactly what Web Tool does.
+
+     <p>Web Tool user creates a link structure that is exactly duplicated by the
+     structure of the Perl hash-of-hashes structure. The link names on the
+     editor page are the hash keys. When you browse the link structure in your
+     web browser, you are actually browsing through the Perl database structure.
+
+     <p>So the web page content:
+
+     <p>$myHash{vehicles}{pickups}{chevy}{S10}{1991}{content} =
+                ' &lt HTML &gt &lt HEAD &gt
+                &lt /HEAD &gt
+                &lt BODY &gt
+                &lt /BODY &gt
+                &lt /HTML &gt '
+                ;
+
+     <p>can be found in:
+
+     <p>baseWebToolDir/vehicles/pickups/chevy/S10/1991/1991.html
+
+     <p>after the 'end session' button is pressed.
+
+     <p>When the user adds new content or a new link, the Perl database file is
+     rewritten with the new info and the page is marked as modified.
+
+</ul>
+
+<h3>II. The CGI Interface</h3>
+
+<ul>
+     <p>A simple overview:
+
+<ul>
+          <p>The URL to a CGI script executes the script on the server and
+          prints the standard output of the program to the web
+          browser screen. So the content of every 'print' statement
+          appears in the web browser.
+
+          <p>Input from the user is passed to the script via environment
+          variables, which are parsed and put into a single hash of name-value
+          pairs.
+</ul>
+
+     <p>Perl/CGI script such as Web Tool work by simply re-executing the script
+     over and over each time the user clicks on a button. Each button submits a
+     different value, and the script reads the input to determine which
+     operation was requested.
+
+     <p>This is a very inefficient in that a unix process is started, the
+     entire program is read from disk, Perl 'compiles' the code, and the code
+     is executed... each time you click on a button.
+
+     <p>But the fact is that even with fairly large programs this all takes
+     place in a fraction of a second. Web Tool is a very large program relative
+     to most Perl/CGI scripts. But the response time is very fast. Avoiding Perl
+     because of 'speed' is solving a problem that doesn't exist.
+
+     <p>As a site grows larger, the CGI response will begin to degrade, but 1)
+     this only applies to the editor session, not the finished HTML pages, which
+     are static files, and 2) mod_perl completely solves this CGI response
+     problem, and apache servers are relatively easy to configure with mod_perl
+     enabled (if you can install Apache, you can install Apache with mod_perl).
+
+</ul>
+
+<h3>III. Web Tool Editor Execution Sequence</h3>
+
+     <p>When the script is initially called, the perl database is read in from
+     the cgi-bin/WebTool/Data directory. It is named after the BASE_TITLE
+     configured in cgi-bin/WebTool/Config/wtConfig.pm. So if your BASE_TITLE is
+     'Chico Digital', the database file would be Data/ChicoDigital.pm.
+
+     <p>The ChicoDigital/LinkMethods.pm package is the direct interface to this
+     data structure. All data is referenced via an object derived from
+     LinkMethods.pm.
+
+<ul>
+     <p><b>So, a basic overview of the execution sequence of Web Tool:</b>
+
+<ul>
+          <p>1) The default editor page is printed out using the HTML template
+          toolPage.html. The editor page is a form where all the buttons
+          submit a single command value back to the script.
+
+          <p>2) The script reads the input parameter variables and determines
+          what operation is requested.
+</ul>
+
+     <p><b>Here are the main operations:</b>
+<ul>
+               <p>- navigate to another page
+               <p>- save the current page and preview HTML
+               <p>- delete the current page
+               <p>- end the edit session
+</ul>
+
+     <p><b>Navigate to another page</b>
+<ul>
+          <p>The page is selected by specifying a path on the query string.
+          The path is a list of keys that point to the current page in the Perl
+          hash structure that was originally read from the database file.
+
+          <p>This path information string, $FORM{path}, is passed to
+          FormMethods::setPath($FORM{path}) which calls
+          ChicoDigital::LinkMethods->new($baseRef,$DELIMITER,$globalPath) to
+          create a LinkMethods object.
+
+          <p>All further reference to the LinkMethods object will use this path
+          information to reference the hash that represents the current page.
+
+          <p>The page selected by the $FORM{path} is printed out to the browser
+          screen using data from WebTool::FormMethods::getHTMLStrings(), and the
+          template found in Templates/toolPage.html.
+
+</ul>
+
+     <p><b>Save the current page and preview HTML</b>
+<ul>
+          <p>The form data, which includes the text body and new
+          links, is written to the perl database file using the current
+          LinkMethods object. Then the current page reference is handed to
+          HTMLWriter.pm module, which uses the template
+          Templates/contentPage.html to create an HTML file in string format,
+          which is sent to the browser screen with a print statement.
+</ul>
+
+     <p><b>Delete the current page</b>
+<ul>
+          <p>The current page reference is used to point to the correct entry
+          in the perl database. That entry is deleted and the database file is rewritten. The editor page is redisplayed with the new database file.
+</ul>
+
+     <p><b>End the Edit Session</b>
+<ul>
+          <p>Before this operation, all the page data and link modifications
+          exist only in the Perl database; no HTML files have been
+          created.
+
+          <p>This operation writes all HTML files using using the current
+          database information. The $CONTENT_DIR
+          and $CONTENT_URL point to the directory where the new pages will be
+          written. This operation traverses the data structure and
+          for every hash that represents an HTML page, writes the corresponding
+          hard HTML file using the specified template file in Templates/user/.
+          The entire perl hash is traversed by a loop that iterates on itself to
+          descend to the next level down. At each page level, the content is
+          rewritten to the directory specified by it's location in the Perl hash
+          structure. All modified pages are written as static HTML using the appropriate template file.
+
+          <p>This operation creates a directory structure on disk
+          that corresponds to the link structure created by the user.
+
+</ul>
+
+</ul>
+
+<h3>IV. Perl References</h3>
+
+<p>Here are some Perl documents on the web that help explain OO syntax and
+Perl hash data structures.
+
+<ul>
+<p><a href="http://www.perldoc.com/perl5.6.1/pod/perlreftut.html">
+Perl Reference Tutorial</a>
+<p><a href="http://www.perldoc.com/perl5.6.1/pod/perlobj.html">
+Perl Object Tutorial</a>
+<p><a href="http://www.perldoc.com/perl5.6.1/pod/perltoot.html">
+More Object Oriented Perl</a>
+<p><a href="http://www.perldoc.com/perl5.6.1/pod/perldsc.html">
+Perl Data Structure Cookbook</a>
+<p><a href="http://www.perldoc.com/perl5.6.1/pod/perltootc.html">
+Perl Class Data</a>
+</ul>
+
+<br><br><hr><br><br>
+
+</TD>
+<TD width=15%></TD>
+</CODE>
+</TR>
+</TABLE>
+</body>
+</html>
+
+
+

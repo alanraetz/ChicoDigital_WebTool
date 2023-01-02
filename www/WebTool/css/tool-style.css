@@ -1,0 +1,84 @@
+.bannercell {
+     BACKGROUND-COLOR: #000; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.bannerlink {
+     BACKGROUND-COLOR: #000; COLOR: #000; DISPLAY: block
+}
+.bordercell {
+     BACKGROUND-COLOR: #000
+}
+.titlecell {
+     BACKGROUND-COLOR: #ccc
+}
+.contentcell {
+     BACKGROUND-COLOR: #fff
+}
+BODY {
+     BACKGROUND: #fff; COLOR: #000; MARGIN: 0px
+}
+HTML {
+     BACKGROUND: #fff; COLOR: #000; MARGIN: 0px
+}
+.chicodigitalbanner {
+     BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; MARGIN: 0px; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.spacercell {
+     HEIGHT: 3px
+}
+.linkcell {
+     WHITE-SPACE: nowrap
+}
+.documentinfo {
+     FONT-SIZE: 80%
+}
+.listbullet {
+     MARGIN: 0px
+}
+.horizbanner {
+     FONT-SIZE: 80%
+}
+.document-body {
+     MARGIN: 10px
+}
+.horizontal-menu {
+     MARGIN: 1px 3px
+}
+A:link {
+     COLOR: #00e
+}
+A:visited {
+     COLOR: #551a8b
+}
+A:active {
+     COLOR: #f00
+}
+DT {
+     FONT-WEIGHT: bold
+}
+.toc DT {
+     FONT-SIZE: 120%
+}
+.tasklist DT {
+     FONT-SIZE: 120%
+}
+H1 {
+     TEXT-ALIGN: center
+}
+.horiz-category-list {
+     TEXT-ALIGN: center
+}
+.author {
+     TEXT-ALIGN: center
+}
+.important {
+     BACKGROUND-COLOR: #ff9; BORDER-BOTTOM: #f00 1px solid; BORDER-LEFT: #f00 1px solid; BORDER-RIGHT: #f00 1px solid; BORDER-TOP: #f00 1px solid; PADDING-BOTTOM: 1em; PADDING-LEFT: 1em; PADDING-RIGHT: 1em; PADDING-TOP: 1em
+}
+STRONG.stronger {
+     FONT-STYLE: italic; FONT-WEIGHT: bold
+}
+STRONG.very-strong {
+     COLOR: #f00; FONT-STYLE: italic; FONT-WEIGHT: bold
+}
+.shaded {
+     BACKGROUND-COLOR: #eee; COLOR: #000
+}

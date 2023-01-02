@@ -1,0 +1,84 @@
+
+Copyright 2002 (c) Chico Digital Engineering.
+http://chicodigital.com
+contact: support@chicodigital.com
+
+============================================================================
+
+We distribute Web Tool without charge to ensure you can install and
+configure it properly, and to allow you to evaluate it for your
+particular purposes.
+
+Web Tool 1.0 is not free. You must buy a License to use it for
+anything other than evaluation purposes.
+
+
+CHICO DIGITAL WEB TOOL EVALUATION LICENSE AGREEMENT
+============================================================================
+
+This is an agreement between Chico Digital Engineering of Chico, California
+("Chico Digital"), and the customer ("the Customer") who is downloading and
+installing Chico Digital Web Tool 1.0 ("the Software").
+
+USE:
+
+Chico Digital grants the Customer a license ("License") to use the Software
+for the sole purpose of internal testing and evaluation of the Software on
+a single web site. Use of the Software for any other purposes constitutes
+a material breech of contract of this Agreement, and grounds for the terminal
+of the License.
+
+The evaluation period of this License is forty-five (45) days from the time
+the Customer successfully installs the Software. The Customer may terminate
+this Agreement by deleting the Software. Chico Digital may terminate this
+Agreement and License if the Customer fails to comply with any of it's
+terms; the Customer agrees to, when notified of this termination, to
+delete the Software.
+
+This Software is Intellectual Property of Chico Digital. Chico Digital
+retains all rights, title and interest to the Software. Customer agrees
+to and acknowledges that it has no ownership rights over the Software
+under the terms of this Agreement.
+
+
+DISTRIBUTION:
+
+The Customer cannot distribute the Software in any form, including
+electronically (for example, over the internet), or physically (for
+example, by disk or CD). This includes distribution of modified versions.
+
+All content and source code in the Software are Copyrighted by
+Chico Digital, and are protected by U.S. Copyright laws and relevant
+international treaties, laws and provisions. The Customer cannot copy or
+distribute these files or any portion of them, other than to make backup
+copies for internal usage for purposes granted by the License.
+
+
+ENFORCEMENT:
+
+The Customer understands that the Software contains technology that
+allows Chico Digital to detect the use of the Software over the internet.
+By downloading and using this Software, the Customer gives permission to
+allow this.
+
+Chico Digital reserves the right to pursue legal damages against the
+Customer for using the Software without a License, or by violating this
+Agreement. Damages include the cost the recovery and related legal fees.
+
+DISCLAIMER:
+
+This software is provided 'as-is' and without warranty. Use it at
+your own risk.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+''AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
